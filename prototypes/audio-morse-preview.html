@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The Reset Company // Audio Preview</title>
+  <style>
+    :root { color-scheme: dark; font-family: Consolas, "Courier New", monospace; background: #050907; color: #a3f5b8; }
+    * { box-sizing: border-box; }
+    body { margin: 0; min-height: 100vh; display: grid; place-items: center; padding: 24px; }
+    main { width: min(100%, 720px); border: 1px solid #29543a; background: #09140e; padding: clamp(20px, 5vw, 40px); }
+    h1 { margin: 0 0 8px; font-size: clamp(22px, 5vw, 32px); }
+    p { color: #9bbca5; line-height: 1.6; }
+    .eyebrow, .status { color: #57c978; font-size: 12px; letter-spacing: .12em; }
+    .buttons { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 10px; margin: 18px 0; }
+    button { min-height: 56px; border: 1px solid #35724a; background: #0d1d13; color: #a3f5b8; font: inherit; text-align: left; padding: 12px 16px; cursor: pointer; }
+    button:hover, button:focus-visible { border-color: #a3f5b8; outline: 2px solid #a3f5b8; outline-offset: 2px; }
+    button strong, button small { display: block; }
+    button small { color: #9bbca5; margin-top: 5px; }
+    .frustration-control { border: 1px solid #203b2a; padding: 14px 16px; margin: 20px 0; }
+    .frustration-heading { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; color: #a3f5b8; }
+    input[type="range"] { width: 100%; margin: 14px 0 6px; accent-color: #77e997; }
+    .cadence-map { margin: 4px 0 0; font-size: 12px; }
+    #stop { border-color: #744b3f; color: #ffb494; }
+    .status { border-top: 1px solid #203b2a; padding-top: 14px; min-height: 34px; }
+    .note { margin-bottom: 0; font-size: 13px; }
+    @media (max-width: 420px) { body { padding: 12px; } main { padding: 18px; } .buttons { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <main>
+    <p class="eyebrow">THE RESET COMPANY /// AUDIO ONLY TEST</p>
+    <h1>通常時サウンド比較</h1>
+    <p>本体には未統合です。各ボタンを押して音を比較してください。モールス案は「RESET」を一度送信し、少し間を空けて繰り返します。</p>
+    <div class="buttons">
+      <button id="current"><strong>現在のNORMAL音</strong><small>productionと同じ短音ループ</small></button>
+      <button id="normal-double"><strong>NORMAL音・Gain 2倍</strong><small>同じ音程 / gain 0.036（約+6 dB）</small></button>
+      <button id="normal-triple"><strong>NORMAL音・Gain 約3倍</strong><small>同じ音程 / gain 0.055（約+9.7 dB）</small></button>
+      <button id="adaptive"><strong>状況連動NORMAL音</strong><small>Gain 0.055 / フラストレーションに応じてテンポ変化</small></button>
+      <button id="morse-soft"><strong>RESETモールス・控えめ</strong><small>650 Hz / gain 0.035</small></button>
+      <button id="morse-clear"><strong>RESETモールス・明瞭</strong><small>650 Hz / gain 0.055</small></button>
+      <button id="stop"><strong>停止 / ミュート</strong><small>鳴っている音を止めます</small></button>
+    </div>
+    <section class="frustration-control" aria-label="フラストレーション連動テンポ試聴">
+      <label class="frustration-heading" for="frustration-slider">
+        <strong>TEST FRUSTRATION</strong>
+        <output id="frustration-value" for="frustration-slider">20 / 100</output>
+      </label>
+      <input id="frustration-slider" type="range" min="0" max="100" value="20" aria-describedby="cadence-map">
+      <p id="cadence-target" class="status" aria-live="polite">LOW // 1.8秒間隔</p>
+      <p id="cadence-map" class="cadence-map">0–34: 1.8秒 · 35–54: 1.4秒 · 55–74: 1.1秒 · 75–100: 0.8秒</p>
+    </section>
+    <div id="status" class="status" role="status" aria-live="polite">READY // 再生ボタンを押してください</div>
+    <p class="note">スライダーは試聴専用で、ゲーム状態とは連動しません。ブラウザーの音声出力・OS音量にも左右されます。モールス案と状況連動音は通常時用の候補で、RESET演出の音は変更しません。</p>
+  </main>
+  <script>
+    const statusLabel = document.querySelector('#status');
+    const normal = { notes: [55, 82.41, 55, 73.42], interval: 720, gain: 0.018 };
+    const frustrationSlider = document.querySelector('#frustration-slider');
+    const frustrationValue = document.querySelector('#frustration-value');
+    const cadenceTarget = document.querySelector('#cadence-target');
+    let context;
+    let loopTimer;
+    let running = false;
+    let adaptiveMode = false;
+    let targetInterval = 1800;
+    let currentInterval = 1800;
+    let activeOscillators = new Set();
+
+    function intervalForFrustration(value) {
+      if (value >= 75) return { interval: 800, label: 'CRITICAL' };
+      if (value >= 55) return { interval: 1100, label: 'WARNING' };
+      if (value >= 35) return { interval: 1400, label: 'CAUTION' };
+      return { interval: 1800, label: 'LOW' };
+    }
+
+    function updateFrustrationPreview() {
+      const value = Number(frustrationSlider.value);
+      const cadence = intervalForFrustration(value);
+      targetInterval = cadence.interval;
+      frustrationValue.value = `${value} / 100`;
+      frustrationValue.textContent = `${value} / 100`;
+      cadenceTarget.textContent = `${cadence.label} // ${cadence.interval / 1000}秒間隔`;
+      if (running && adaptiveMode) renderAdaptiveStatus();
+    }
+
+    function renderAdaptiveStatus() {
+      const value = frustrationSlider.value;
+      statusLabel.textContent = `PLAYING // FRUSTRATION ${value} // ${currentInterval / 1000}秒 → ${targetInterval / 1000}秒`;
+    }
+
+    async function ensureContext() {
+      context ??= new AudioContext();
+      if (context.state === 'suspended') await context.resume();
+      return context.state === 'running';
+    }
+
+    function stop() {
+      running = false;
+      adaptiveMode = false;
+      clearTimeout(loopTimer);
+      loopTimer = null;
+      for (const oscillator of activeOscillators) {
+        try { oscillator.stop(); } catch { /* すでに停止済み */ }
+      }
+      activeOscillators.clear();
+    }
+
+    function tone(frequency, duration, volume, wave = 'triangle') {
+      const now = context.currentTime;
+      const oscillator = context.createOscillator();
+      const gain = context.createGain();
+      oscillator.type = wave;
+      oscillator.frequency.setValueAtTime(frequency, now);
+      gain.gain.setValueAtTime(0.0001, now);
+      gain.gain.exponentialRampToValueAtTime(volume, now + 0.008);
+      gain.gain.setValueAtTime(volume, now + Math.max(0.012, duration - 0.012));
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + duration);
+      oscillator.connect(gain);
+      gain.connect(context.destination);
+      oscillator.onended = () => activeOscillators.delete(oscillator);
+      activeOscillators.add(oscillator);
+      oscillator.start(now);
+      oscillator.stop(now + duration + 0.01);
+    }
+
+    async function playCurrent(volume = normal.gain, label = '現在のNORMAL音') {
+      stop();
+      if (!await ensureContext()) return;
+      running = true;
+      let step = 0;
+      const tick = () => {
+        if (!running) return;
+        tone(normal.notes[step++ % normal.notes.length], 0.22, volume);
+        loopTimer = setTimeout(tick, normal.interval);
+      };
+      statusLabel.textContent = `PLAYING // ${label}`;
+      tick();
+    }
+
+    async function playAdaptive() {
+      stop();
+      if (!await ensureContext()) return;
+      running = true;
+      adaptiveMode = true;
+      currentInterval = targetInterval;
+      let step = 0;
+      const tick = () => {
+        if (!running || !adaptiveMode) return;
+        tone(normal.notes[step++ % normal.notes.length], 0.22, 0.055);
+        if (currentInterval !== targetInterval) {
+          const difference = targetInterval - currentInterval;
+          currentInterval += Math.sign(difference) * Math.min(Math.abs(difference), 250);
+        }
+        renderAdaptiveStatus();
+        loopTimer = setTimeout(tick, currentInterval);
+      };
+      renderAdaptiveStatus();
+      tick();
+    }
+
+    async function playMorse(volume, label) {
+      stop();
+      if (!await ensureContext()) return;
+      running = true;
+      const unit = 0.11;
+      const letters = ['.-.', '.', '...', '.', '-']; // R E S E T
+      const phraseSeconds = letters.reduce((total, letter, letterIndex) => {
+        const marks = [...letter];
+        const markSeconds = marks.reduce((sum, mark) => sum + (mark === '.' ? unit : unit * 3), 0);
+        return total + markSeconds + Math.max(0, marks.length - 1) * unit + (letterIndex < letters.length - 1 ? unit * 3 : 0);
+      }, 0);
+      const send = () => {
+        if (!running) return;
+        let offset = 0;
+        for (const letter of letters) {
+          const marks = [...letter];
+          marks.forEach((mark, index) => {
+            const length = mark === '.' ? unit : unit * 3;
+            setTimeout(() => { if (running) tone(650, length * 0.88, volume, 'sine'); }, offset * 1000);
+            offset += length + (index < marks.length - 1 ? unit : 0);
+          });
+          offset += unit * 3;
+        }
+        loopTimer = setTimeout(send, (phraseSeconds + 5) * 1000);
+      };
+      statusLabel.textContent = `PLAYING // ${label} — ·−·  ·  ···  ·  −`;
+      send();
+    }
+
+    document.querySelector('#current').addEventListener('click', playCurrent);
+    document.querySelector('#normal-double').addEventListener('click', () => playCurrent(0.036, 'NORMAL音・Gain 2倍'));
+    document.querySelector('#normal-triple').addEventListener('click', () => playCurrent(0.055, 'NORMAL音・Gain 約3倍'));
+    document.querySelector('#adaptive').addEventListener('click', playAdaptive);
+    frustrationSlider.addEventListener('input', updateFrustrationPreview);
+    updateFrustrationPreview();
+    document.querySelector('#morse-soft').addEventListener('click', () => playMorse(0.035, 'RESET モールス・控えめ'));
+    document.querySelector('#morse-clear').addEventListener('click', () => playMorse(0.055, 'RESET モールス・明瞭'));
+    document.querySelector('#stop').addEventListener('click', () => {
+      stop();
+      statusLabel.textContent = 'STOPPED // 音声を停止しました';
+    });
+    window.addEventListener('pagehide', stop);
+  </script>
+</body>
+</html>

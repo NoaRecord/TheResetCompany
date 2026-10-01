@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en" data-ui-state="NORMAL">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#050907">
+  <meta name="description" content="A modest employee management simulation with an unreasonably elaborate RESET procedure.">
+  <title>TheResetCompany // Employee Operations</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="crt-screen">
+    <header class="topbar">
+      <a class="wordmark" href="#employee" aria-label="The Reset Company home">THE RESET COMPANY <span>/// EMPLOYEE OPERATIONS</span></a>
+      <div class="top-actions">
+        <span id="system-clock" class="system-clock">LOCAL SESSION</span>
+        <button id="help-button" class="quiet-button help-button" type="button" aria-haspopup="dialog" aria-controls="help-overlay">?</button>
+        <button id="mute-button" class="quiet-button" type="button" aria-pressed="true">AUDIO: MUTED</button>
+      </div>
+    </header>
+
+    <main class="app-shell">
+      <nav class="mode-tabs" aria-label="Game mode">
+        <button class="mode-tab is-active" type="button" data-mode="employee" aria-current="page">EMPLOYEE MODE</button>
+        <button class="mode-tab" type="button" data-mode="just-reset">JUST RESET</button>
+      </nav>
+
+      <section id="employee-mode" class="mode-view" aria-labelledby="employee-title">
+        <div class="page-heading">
+          <div><p class="eyebrow">OPERATIONS TERMINAL // RELEASE 0.1</p><h1 id="employee-title">Daily Service Report</h1></div>
+          <div class="day-marker"><span id="system-status">SYSTEM NOMINAL</span><strong id="day-value">01</strong><small>/ 30</small></div>
+        </div>
+
+        <div class="status-strip" role="status" aria-live="polite">
+          <span class="status-light" aria-hidden="true"></span><span id="status-message">LOADING COMPANY RECORDS…</span>
+        </div>
+
+        <div class="dashboard-grid" aria-label="Employee operations dashboard">
+          <section class="panel metrics-panel" aria-labelledby="metrics-title">
+            <div class="panel-heading"><h2 id="metrics-title">USER METRICS</h2><span>LIVE LEDGER</span></div>
+            <div class="population-grid">
+              <div class="population-metric"><span>ACTIVE USERS</span><strong id="active-users">—</strong></div>
+              <div class="population-metric"><span>PAID USERS</span><strong id="paid-users">—</strong></div>
+              <div class="population-metric"><span>EXHAUSTED USERS</span><strong id="exhausted-users">—</strong></div>
+            </div>
+            <div id="metrics-list" class="metrics-list" aria-label="Service condition gauges"></div>
+          </section>
+
+          <section class="panel action-panel" aria-labelledby="action-title">
+            <div class="panel-heading"><h2 id="action-title">RESET OPERATIONS</h2><span id="phase-indicator">READY</span></div>
+            <div class="energy-line"><span>RESET ENERGY</span><strong id="energy-value">—</strong></div>
+            <div class="energy-gauge" role="img" aria-label="Reset Energy gauge">
+              <div id="ready-zone" class="ready-zone"></div><div id="energy-fill" class="energy-fill"></div>
+              <span id="ready-threshold" class="ready-threshold"></span>
+            </div>
+            <div class="energy-caption"><span>GLOBAL READY ZONE</span><span id="energy-threshold-label">THRESHOLD —</span></div>
+            <div id="global-ready" class="ready-state"><span class="ready-lamp" aria-hidden="true"></span><strong>GLOBAL RESET NOT READY</strong></div>
+            <button id="begin-day-button" class="action-button begin-button" type="button"><strong>BEGIN DAY</strong><small>Run today's pressure report</small></button>
+            <div class="action-list">
+              <button class="action-button" type="button" data-action="WAIT"><span>01</span><strong>WAIT</strong><small>Rely on Natural Recovery at Settlement</small></button>
+              <button class="action-button" type="button" data-action="BANKED_RESET"><span>02</span><strong>BANKED RESET <b id="banked-stock">0 / 3</b></strong><small>Spend 1 event-awarded compensation stock</small></button>
+              <button class="action-button global-action" type="button" data-action="GLOBAL_RESET"><span>03</span><strong>PREPARE GLOBAL RESET</strong><small><b id="global-energy-cost">90</b> energy · operational cost <b id="global-operational-cost">65</b></small></button>
+            </div>
+            <div class="reset-ledger"><span>OPS COST</span><strong id="operational-cost-total">0</strong><span>·</span><span>BANKED</span><strong id="banked-count">0</strong><span>·</span><span>GLOBAL</span><strong id="global-count">0</strong></div>
+          </section>
+
+          <section class="panel krog-panel" aria-labelledby="krog-title">
+            <div class="panel-heading"><h2 id="krog-title">KROG SOCIAL MONITOR</h2><span id="krog-category">CALM</span></div>
+            <p class="monitor-caption">STATIC SIGNAL / FICTIONAL FEED</p>
+            <div id="krog-feed" class="krog-feed" aria-live="polite"></div>
+          </section>
+
+          <section class="panel daily-panel" aria-labelledby="daily-title">
+            <div class="panel-heading"><h2 id="daily-title">DAILY USER REPORT</h2><span id="report-day">AWAITING SETTLEMENT</span></div>
+            <div id="daily-report" class="daily-report"><p class="placeholder">PRESSURE → DECISION → SETTLEMENT</p></div>
+          </section>
+
+          <section class="panel klaude-panel" aria-labelledby="klaude-title">
+            <div class="panel-heading"><h2 id="klaude-title">KLAUDE RECOVERY</h2><span>NET LOST / RETURNED</span></div>
+            <div class="klaude-bar" role="img" aria-label="Net lost and returned Klaude users">
+              <span id="klaude-net-bar" class="klaude-segment lost"></span><span id="klaude-returned-bar" class="klaude-segment returned"></span>
+            </div>
+            <div class="klaude-counts">
+              <div><span>GROSS LOST</span><strong id="klaude-gross">0</strong></div>
+              <div><span>RETURNED</span><strong id="klaude-returned">0</strong></div>
+              <div><span>NET LOST</span><strong id="klaude-net">0</strong></div>
+            </div>
+          </section>
+
+          <section class="panel activity-panel" aria-labelledby="activity-title">
+            <div class="panel-heading"><h2 id="activity-title">CHAPPY / INCIDENT</h2><span>RECENT</span></div>
+            <p id="chappy-message" class="chappy-message">Chappy is checking the service ledger.</p>
+            <ol id="event-log" class="event-log"><li>Terminal initialized. Awaiting first pressure report.</li></ol>
+          </section>
+        </div>
+
+        <footer class="bottom-line"><span>LOCAL SAVE ENABLED</span><span>NO EXTERNAL SERVICES CONNECTED</span><span>v0.1 R1 // EMPLOYEE MODE</span></footer>
+      </section>
+
+      <section id="just-reset-mode" class="mode-view just-reset-view" aria-labelledby="just-reset-title" hidden>
+        <div class="page-heading">
+          <div><p class="eyebrow">UNAUTHORIZED JOY DIVISION // 0.1</p><h1 id="just-reset-title">JUST RESET</h1></div>
+          <div class="day-marker"><span>RESET COUNT</span><strong id="just-reset-count">00</strong></div>
+        </div>
+        <section class="panel just-reset-card">
+          <p class="big-notice">THE WORLD IS ALREADY RESET.</p>
+          <p>There is no service ledger here. No energy cost. No business reason.</p>
+          <p id="just-reset-joke" class="just-reset-joke">The button exists because someone approved the budget.</p>
+          <button id="just-reset-button" class="just-reset-button" type="button">PREPARE ANOTHER GLOBAL RESET</button>
+          <p class="small-note">This uses the same RESET sequence. Employee Mode state is not changed.</p>
+        </section>
+        <footer class="bottom-line"><span>JUST RESET MODE</span><span>NO CONSEQUENCES LOGGED</span></footer>
+      </section>
+    </main>
+
+    <div id="help-overlay" class="modal-overlay" hidden>
+      <section class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="help-title" tabindex="-1">
+        <div class="panel-heading"><h2 id="help-title">EMPLOYEE OPERATIONS // QUICK GUIDE</h2><button id="help-close" class="quiet-button" type="button">CLOSE</button></div>
+        <div id="help-content" class="help-content"></div>
+      </section>
+    </div>
+    <div id="ending-overlay" class="modal-overlay" hidden>
+      <section class="modal-panel ending-dialog" role="dialog" aria-modal="true" aria-labelledby="ending-title" tabindex="-1">
+        <div class="panel-heading"><h2 id="ending-title">DAY 30 // FINAL REPORT</h2><button id="ending-close" class="quiet-button" type="button">CLOSE</button></div>
+        <div class="ending-grid">
+          <div><span>FINAL SCORE</span><strong id="final-score">—</strong></div>
+          <div><span>MR. SOM EVALUATION</span><strong id="som-evaluation">—</strong></div>
+          <div><span>FINAL PAID USERS</span><strong id="final-paid">—</strong></div>
+          <div><span>GROSS / RETURNED / NET LOST</span><strong id="final-klaude">—</strong></div>
+          <div><span>TOTAL OPERATIONAL COST</span><strong id="final-operational-cost">—</strong></div>
+          <div><span>BANKED / GLOBAL RESETS</span><strong id="final-reset-counts">—</strong></div>
+        </div>
+        <p id="som-comment" class="som-comment"></p>
+        <section class="user-voices" aria-labelledby="user-voices-title">
+          <h3 id="user-voices-title">USER VOICES</h3>
+          <div id="user-voices"></div>
+        </section>
+        <div class="ending-actions"><button id="play-again-button" class="action-button" type="button">[ PLAY AGAIN ]</button></div>
+      </section>
+    </div>
+
+    <div id="sequence-overlay" class="sequence-overlay" hidden aria-label="Global Reset sequence">
+      <div class="sequence-frame-wrap"><iframe id="sequence-frame" title="Global Reset sequence" src="prototypes/reset-sequence/index.html" hidden></iframe></div>
+    </div>
+    <div id="loading-error" class="loading-error" role="alert" hidden></div>
+  </div>
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

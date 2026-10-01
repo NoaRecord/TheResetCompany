@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="630" height="500" viewBox="0 0 630 500">
+  <defs>
+    <linearGradient id="screen" x2="0" y2="1">
+      <stop stop-color="#0a170f"/>
+      <stop offset="1" stop-color="#030705"/>
+    </linearGradient>
+    <radialGradient id="glow">
+      <stop stop-color="#15341e" stop-opacity=".9"/>
+      <stop offset="1" stop-color="#030705" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="scan" width="4" height="4" patternUnits="userSpaceOnUse">
+      <path d="M0 3.5H4" stroke="#d5ffda" stroke-opacity=".06"/>
+    </pattern>
+    <filter id="greenGlow" x="-.3" y="-.3" width="1.6" height="1.6">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="630" height="500" fill="#030705"/>
+  <rect width="630" height="500" fill="url(#glow)"/>
+  <rect x="20" y="20" width="590" height="460" rx="8" fill="url(#screen)" stroke="#42774e" stroke-width="2"/>
+  <rect x="29" y="29" width="572" height="442" rx="4" fill="url(#scan)"/>
+  <text x="48" y="58" fill="#89ff9a" font-family="Courier New,monospace" font-size="12" letter-spacing="2">THE RESET COMPANY</text>
+  <text x="582" y="58" fill="#597c62" text-anchor="end" font-family="Courier New,monospace" font-size="10" letter-spacing="1">EMPLOYEE OPERATIONS // 0.1.0</text>
+  <path d="M48 73H582" stroke="#31583a"/>
+  <text x="48" y="126" fill="#8dff9a" font-family="Courier New,monospace" font-size="42" font-weight="700" filter="url(#greenGlow)">THE RESET</text>
+  <text x="48" y="172" fill="#8dff9a" font-family="Courier New,monospace" font-size="42" font-weight="700" filter="url(#greenGlow)">COMPANY</text>
+  <text x="50" y="198" fill="#c1d9c6" font-family="Courier New,monospace" font-size="12" letter-spacing="1.5">A VERY SERIOUS RESET OPERATIONS SIMULATOR</text>
+  <rect x="48" y="226" width="340" height="190" rx="3" fill="#06100a" stroke="#3d7149"/>
+  <text x="66" y="252" fill="#89ff9a" font-family="Courier New,monospace" font-size="11" letter-spacing="1.5">DAILY SERVICE REPORT</text>
+  <path d="M66 264H369" stroke="#284932"/>
+  <text x="66" y="287" fill="#71987a" font-family="Courier New,monospace" font-size="9">ACTIVE USERS</text>
+  <text x="66" y="310" fill="#b7ffc1" font-family="Courier New,monospace" font-size="20" font-weight="700">105,278</text>
+  <text x="224" y="287" fill="#71987a" font-family="Courier New,monospace" font-size="9">SOCIAL FRUSTRATION</text>
+  <text x="224" y="310" fill="#ffb457" font-family="Courier New,monospace" font-size="20" font-weight="700">68.5%</text>
+  <text x="66" y="339" fill="#71987a" font-family="Courier New,monospace" font-size="9">RESET ENERGY // GLOBAL READY</text>
+  <rect x="66" y="349" width="303" height="10" fill="#14251a"/>
+  <rect x="66" y="349" width="273" height="10" fill="#72db89"/>
+  <rect x="339" y="349" width="30" height="10" fill="#e3493e"/>
+  <text x="66" y="390" fill="#89ff9a" font-family="Courier New,monospace" font-size="12">WAIT</text>
+  <text x="161" y="390" fill="#89ff9a" font-family="Courier New,monospace" font-size="12">BANKED RESET</text>
+  <text x="66" y="406" fill="#ff6859" font-family="Courier New,monospace" font-size="10">PREPARE GLOBAL RESET</text>
+  <rect x="407" y="226" width="175" height="190" rx="3" fill="#080f0b" stroke="#31583a"/>
+  <text x="424" y="252" fill="#89ff9a" font-family="Courier New,monospace" font-size="10" letter-spacing="1">KROG SOCIAL MONITOR</text>
+  <path d="M424 264H565" stroke="#284932"/>
+  <text x="424" y="290" fill="#b7ffc1" font-family="Courier New,monospace" font-size="11">“Give us a reset,</text>
+  <text x="424" y="307" fill="#b7ffc1" font-family="Courier New,monospace" font-size="11">plz!”</text>
+  <path d="M424 325H565" stroke="#1d3423" stroke-dasharray="3 3"/>
+  <text x="424" y="350" fill="#8eb397" font-family="Courier New,monospace" font-size="10">30 DAYS.</text>
+  <text x="424" y="367" fill="#8eb397" font-family="Courier New,monospace" font-size="10">ONE VERY LARGE</text>
+  <text x="424" y="384" fill="#ff7163" font-family="Courier New,monospace" font-size="10" font-weight="700">RESET BUTTON.</text>
+  <path d="M48 437H582" stroke="#31583a"/>
+  <circle cx="57" cy="455" r="3" fill="#8dff9a"/>
+  <text x="69" y="459" fill="#6e9476" font-family="Courier New,monospace" font-size="9" letter-spacing="1">A RETRO MANAGEMENT PARODY</text>
+  <text x="582" y="459" fill="#6e9476" text-anchor="end" font-family="Courier New,monospace" font-size="9">30 DAYS // v0.1.0</text>
+</svg>

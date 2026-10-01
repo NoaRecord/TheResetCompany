@@ -1,0 +1,91 @@
+{
+  "version": "0.1-r1",
+  "events": [
+    {
+      "id": "bug_fixed",
+      "weight": 20,
+      "repeatable": true,
+      "cooldownDays": 4,
+      "conditions": {},
+      "effects": {
+        "frustrationDelta": -8,
+        "satisfactionDelta": 3
+      },
+      "messageKey": "event.bug_fixed",
+      "tags": ["bug_incident"]
+    },
+    {
+      "id": "server_trouble",
+      "weight": 18,
+      "repeatable": true,
+      "cooldownDays": 4,
+      "conditions": {},
+      "effects": {
+        "extraExhaustedAvailablePaidRate": 0.04,
+        "frustrationDelta": 10,
+        "satisfactionDelta": -4,
+        "bankedStockGrant": 1,
+        "bankedStockGrantProbability": 0.25
+      },
+      "messageKey": "event.server_trouble",
+      "tags": ["bug_incident"]
+    },
+    {
+      "id": "klaude_reset_everyone",
+      "weight": 14,
+      "repeatable": true,
+      "cooldownDays": 7,
+      "conditions": {},
+      "effects": {
+        "directKlaudeLossPaidRate": 0.005,
+        "frustrationDelta": 8,
+        "satisfactionDelta": -4
+      },
+      "messageKey": "event.klaude_reset_everyone",
+      "tags": ["klaude_event"]
+    },
+    {
+      "id": "tybo_posted",
+      "weight": 16,
+      "repeatable": true,
+      "cooldownDays": 3,
+      "conditions": {},
+      "effects": {
+        "expectationDelta": 8
+      },
+      "messageKey": "event.tybo_posted",
+      "tags": ["tybo_posted"]
+    },
+    {
+      "id": "user_milestone",
+      "weight": 16,
+      "repeatable": false,
+      "cooldownDays": 0,
+      "conditions": {
+        "activeUsersRatioMin": 1.03
+      },
+      "effects": {
+        "satisfactionDelta": 4,
+        "bankedStockGrant": 1
+      },
+      "messageKey": "event.user_milestone",
+      "tags": []
+    },
+    {
+      "id": "new_model_released",
+      "weight": 16,
+      "repeatable": false,
+      "cooldownDays": 0,
+      "conditions": {
+        "minDay": 8
+      },
+      "effects": {
+        "satisfactionDelta": 5,
+        "frustrationDelta": -3,
+        "extraExhaustedAvailablePaidRate": 0.03
+      },
+      "messageKey": "event.new_model_released",
+      "tags": []
+    }
+  ]
+}

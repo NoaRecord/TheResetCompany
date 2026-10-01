@@ -1,0 +1,42 @@
+{
+  "rng": {
+    "seed1_uint32_first5": [
+      270369,
+      67634689,
+      2647435461,
+      307599695,
+      2398689233
+    ],
+    "seed12345_uint32_first5": [
+      3336926330,
+      1697253807,
+      2816511904,
+      1955480042,
+      718842323
+    ]
+  },
+  "day1_wait_seed12345": {
+    "rolls": {
+      "usageRoll": 0.776938705239445,
+      "eventRoll": 0.3951726963277906,
+      "eventPickRoll": 0.6557702794671059
+    },
+    "pressure": {
+      "randomEvent": null,
+      "newExhausted": 3509,
+      "exhaustedUsers": 9509,
+      "frustration": 26.479116
+    },
+    "settlement": {
+      "day": 2,
+      "activeUsers": 100290,
+      "paidUsers": 60138,
+      "exhaustedUsers": 9419,
+      "satisfaction": 64.96489257866666,
+      "frustration": 26.479116,
+      "expectation": 20,
+      "resetEnergy": 48,
+      "usersLostToKlaude": 90
+    }
+  }
+}

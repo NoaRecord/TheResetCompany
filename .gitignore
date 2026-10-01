@@ -1,0 +1,8 @@
+# Imported handoff material and local verification artifacts are not release source.
+/_handoff/
+/release/itch/.runtime-check/
+
+# Local tool output
+__pycache__/
+*.py[cod]
+node_modules/

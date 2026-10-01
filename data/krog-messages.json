@@ -1,0 +1,84 @@
+{
+  "calm": [
+    "Quiet day. Nobody is yelling about limits. Suspicious.",
+    "Used half my Code-X. I am behaving responsibly for once.",
+    "No reset discourse in my feed. Nature is healing.",
+    "Shipping code before dinner. What is this feeling?",
+    "Today the limit bar is merely existing. I can work with that.",
+    "The service status page has not become my main hobby today.",
+    "A small task, one cup of coffee, no incident thread. Nice.",
+    "I finished the commit before checking the quota. Personal growth.",
+    "Everything is calm. I am saving this screenshot for later."
+  ],
+  "frustration_medium": [
+    "The limit warning has entered the chat.",
+    "I can finish this task if Code-X stops counting.",
+    "Not asking for a reset yet. Yet.",
+    "My remaining quota has become a management problem.",
+    "One more prompt and I will start negotiating with the meter.",
+    "The progress bar is moving. My patience is not.",
+    "Give me a reset, plz!",
+    "I am choosing optimism until the next usage refresh.",
+    "This bug is small. My remaining capacity is smaller."
+  ],
+  "frustration_high": [
+    "Give us a reset, plz!",
+    "I have three files left and zero patience.",
+    "The limit is gone. The project is not.",
+    "BANKED RESET WHEN",
+    "I am staring at the quota screen professionally.",
+    "Give me a reset, plz!",
+    "The deadline is real. The remaining tokens are theoretical.",
+    "Every retry is now a budget meeting.",
+    "I named the branch before the service ran out. That counts.",
+    "No capacity, no panic. Fine, a little panic."
+  ],
+  "after_global_reset": [
+    "WE ARE BACK.",
+    "Fresh limits. Immediate bad decisions.",
+    "The reset actually happened. Nobody move.",
+    "Code-X is alive again. Productivity incident incoming.",
+    "Give us a reset, plz! ...wait, we just got one.",
+    "A clean slate and an unchanged backlog.",
+    "The meter is full. My confidence is temporarily full too.",
+    "Give me a reset, plz! I mean, thank you.",
+    "Everyone is back. The status page can rest."
+  ],
+  "klaude_event": [
+    "Klaude looks very welcoming from over here.",
+    "Trying Klaude for one task. This is absolutely temporary.",
+    "Someone said Klaude reset everyone. Interesting.",
+    "I have opened a competitor tab for research purposes.",
+    "The migration plan is just a browser tab and a hunch.",
+    "I am comparing response times. This is totally not a breakup.",
+    "My Klaude account is for contingency research. Obviously.",
+    "Klaude is looking less like a backup and more like a plan.",
+    "Give us a reset, plz! I have one foot on the other platform."
+  ],
+  "bug_incident": [
+    "The bug is fixed. The workaround has become my personality.",
+    "Service is back. I would like my afternoon returned.",
+    "Incident resolved, allegedly.",
+    "I survived another status-page refresh marathon.",
+    "The patch is live. Please do not ask about the hotfix branch.",
+    "Everything is green except the incident timeline.",
+    "We have identified the cause: a cause was present.",
+    "Give me a reset, plz! This deploy has seen things.",
+    "Chappy says the service is stable. I am letting that sit."
+  ],
+  "tybo_posted": [
+    "TYBO 👀",
+    "That post definitely means something. Probably.",
+    "Tybo posted two words and now everyone has theories.",
+    "Reading the CEO post as if it were an oracle.",
+    "The punctuation is doing a lot of work here.",
+    "I have refreshed the post. It still says the same thing.",
+    "Give us a reset, plz! Tybo is online.",
+    "One vague update. Twelve new internal interpretations.",
+    "No announcement yet. The rumor dashboard is fully operational."
+  ],
+  "ending_user_voices": [
+    "Give me a reset, plz!",
+    "Give us a reset, plz!"
+  ]
+}

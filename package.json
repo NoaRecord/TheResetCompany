@@ -1,0 +1,8 @@
+{
+  "name": "theresetcompany-logic-v0.1-handoff",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/*.test.mjs"
+  }
+}

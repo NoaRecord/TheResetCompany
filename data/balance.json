@@ -1,0 +1,69 @@
+{
+  "version": "0.1-r1",
+  "schemaVersion": 2,
+  "experimentId": "TRC-V01R1-E002",
+  "game": { "maxDays": 30 },
+  "initial": {
+    "activeUsers": 100000,
+    "paidUsers": 60000,
+    "exhaustedUsers": 6000,
+    "satisfaction": 65.0,
+    "frustration": 25.0,
+    "expectation": 20.0,
+    "resetEnergy": 60,
+    "bankedResetStock": 0
+  },
+  "usage": { "baseExhaustionRate": 0.06, "noiseMin": 0.85, "noiseMax": 1.15 },
+  "frustration": { "baseGrowth": 0.3, "exhaustedWeight": 6.0, "expectationMultiplier": 1.2 },
+  "satisfaction": { "baseRecovery": 0.6, "frustrationImpact": 1.8, "exhaustionImpact": 1.0 },
+  "growth": { "baseRate": 0.001, "satisfactionSensitivity": 0.006, "frustrationSensitivity": 0.004, "paidConversionRate": 0.60 },
+  "churn": { "baseRate": 0.0015, "lowSatisfactionSensitivity": 0.012, "frustrationSensitivity": 0.016 },
+  "klaudeReturn": { "baseRate": 0.005, "satisfactionSensitivity": 0.04, "frustrationSensitivity": 0.025, "maxRate": 0.04 },
+  "resetEnergy": { "max": 100, "dailyGain": 30 },
+  "bankedReset": {
+    "stockMax": 3,
+    "exhaustedRecoveryRatio": 0.35,
+    "frustrationReduction": 11,
+    "satisfactionGain": 4,
+    "expectationGain": 4,
+    "operationalCost": 15
+  },
+  "globalReset": {
+    "energyCost": 90,
+    "exhaustedRecoveryRatio": 1.0,
+    "frustrationReduction": 40,
+    "satisfactionGain": 12,
+    "expectationGain": 18,
+    "operationalCost": 65
+  },
+  "naturalRecovery": { "dailyRate": 0.20 },
+  "events": { "dailyChance": 0.22, "maxPerDay": 1 },
+  "score": {
+    "base": 500,
+    "paidRetentionWeight": 250,
+    "activeGrowthWeight": 250,
+    "activeGrowthCap": 0.5,
+    "satisfactionWeight": 2.5,
+    "frustrationPenaltyWeight": 1.0,
+    "expectationPenaltyWeight": 1.0,
+    "grossKlaudeLossWeight": 280,
+    "netKlaudeLossWeight": 520,
+    "operationalCostWeight": 0.75,
+    "globalResetCountPenalty": 20
+  },
+  "thresholds": {
+    "satisfaction": { "normalMin": 70, "cautionMin": 55, "warningMin": 40 },
+    "frustration": { "cautionMin": 35, "warningMin": 55, "criticalMin": 75 },
+    "expectation": { "cautionMin": 35, "warningMin": 55, "criticalMin": 75 }
+  },
+  "krog": { "frustrationMedium": 40, "frustrationHigh": 65 },
+  "som": {
+    "klaudeNetExodusRatio": 0.15,
+    "klaudeGrossExodusRatio": 0.20,
+    "resetSpamOperationalCost": 300,
+    "resetSpamGlobalCount": 5,
+    "highSatisfaction": 75,
+    "highExpectation": 60,
+    "highScore": 780
+  }
+}

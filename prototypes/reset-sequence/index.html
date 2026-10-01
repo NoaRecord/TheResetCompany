@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en" data-ui-state="NORMAL">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TheResetCompany — GLOBAL RESET Prototype</title>
+  <link rel="stylesheet" href="reset-sequence.css">
+</head>
+<body>
+  <main id="sequence-shell" aria-live="polite">
+    <header>
+      <p>THE RESET COMPANY // RESET OPERATIONS</p>
+      <h1>GLOBAL RESET CONTROL</h1>
+      <p id="phase-label">Standby</p>
+    </header>
+
+    <section id="sequence-status" aria-live="polite">
+      SYSTEM STANDBY
+    </section>
+
+    <section id="core-panel" hidden>
+      <p>RESET CORE ............ <span id="core-state">STANDBY</span></p>
+      <p>CORE CHARGE ............ <span id="core-charge">0%</span></p>
+    </section>
+
+    <section id="target-panel" hidden>
+      <p>TARGET SCOPE .......... <span id="target-scope">—</span></p>
+      <p>ACTIVE USERS .......... <span id="target-active-users">0</span></p>
+      <p>LIMIT EXHAUSTED ....... <span id="target-exhausted-users">0</span></p>
+      <p>SOCIAL FRUSTRATION .... <span id="target-frustration">0%</span></p>
+    </section>
+
+    <section id="safety-panel" hidden>
+      <p>SAFETY LOCK ........... <span id="safety-lock-state">LOCKED</span></p>
+      <p>ANTI-SHOCK ............ READY</p>
+      <p>ANTI-FLASH ............ READY</p>
+      <p>PROPAGATION NODES ..... READY</p>
+    </section>
+
+    <section id="reset-unit" hidden>
+      <div id="safety-cover" data-cover-state="closed" aria-hidden="true"></div>
+      <button id="hold-reset-button" type="button" hidden disabled>
+        HOLD TO RESET
+        <span id="hold-progress">0%</span>
+      </button>
+    </section>
+
+    <section id="sequence-controls">
+      <button id="start-sequence-button" type="button">START GLOBAL RESET PROTOTYPE</button>
+      <button id="release-safety-button" type="button" hidden>RELEASE FINAL SAFETY</button>
+      <button id="open-cover-button" type="button" hidden>OPEN COVER</button>
+    </section>
+
+    <section id="propagation-panel" hidden>
+      <div id="propagation-regions"></div>
+      <p>GLOBAL PROPAGATION <span id="propagation-progress">0%</span></p>
+    </section>
+  </main>
+
+  <script src="reset-sequence.js"></script>
+</body>
+</html>
