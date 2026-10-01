@@ -7,7 +7,7 @@ TheResetCompany is a small browser parody and management simulation about servic
 ## Play
 
 - **GitHub Pages:** Link will be added after publication.
-- **itch.io:** Link will be added after publication.
+- **itch.io:** [Play on itch.io](https://noarecord.itch.io/the-reset-company)
 
 ## Play locally
 
@@ -70,10 +70,10 @@ The RESET prototype's browser tests require Playwright and a Chromium executable
 
 ## v0.1 scope
 
-This release focuses on Employee Mode, Banked and Global Reset, a small set of random events, the fictional Krog monitor, JUST RESET, a responsive CRT-style interface, local persistence, and reduced-motion support. Client Mode, real X/Twitter content, external APIs, backends, accounts, rankings, multiplayer, and advanced Balance Lab systems are outside this release.
+This release focuses on Employee Mode, Banked and Global Reset, a small set of random events, the fictional Krog monitor, JUST RESET, a responsive CRT-style interface, local persistence, and reduced-motion support. Client Mode, real social media content, external APIs, backends, accounts, rankings, multiplayer, and advanced Balance Lab systems are outside this release.
 
 ## Parody and publication status
 
 The Reset Company is an unofficial parody. The company, services, characters, events, and social posts shown in the game are fictional. The game does not retrieve real social-media content.
 
-Version v0.1.0 is a release candidate awaiting final human playtesting and GitHub Pages verification. Once Pages is enabled, the playable URL will be added above. Source is available at <https://github.com/NoaRecord/TheResetCompany>.
+Version v0.1.0 is available on itch.io. GitHub Pages setup and hosted verification remain pending. Source is available at <https://github.com/NoaRecord/TheResetCompany>.
